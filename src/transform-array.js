@@ -2,21 +2,22 @@ const CustomError = require("../extensions/custom-error");
 
 module.exports = function transform(arr) {
   console.log(arr);
-  let new_arr=arr;
-  for (let i=0; i<new_arr.length; i++){
-    switch(new_arr[i]) { 
-      case '--double-next': new_arr.splice(i,1,new_arr[i+1]); break;
-      case '--double-prev': new_arr.splice(i,1,new_arr[i-1]); break;
+  let orr=arr;
+  for (let i=0; i<orr.length; i++){
+    switch(orr[i]) { 
+      case '--double-next': if (orr[i+1]!=undefined) orr.splice(i,1,orr[i+1]); else orr.splice(i,1); break;
+      case '--double-prev': if (orr[i-1]!=undefined && orr[i-2]!='--discard-next') orr.splice(i,1,orr[i-1]); else orr.splice(i,1); break;
       default: break;
     }
   } 
-  for (let i=0; i<new_arr.length; i++){
-    switch(new_arr[i]) { 
-      case '--discard-next': new_arr.splice(i+1,1); break;
-      case '--discard-prev': new_arr.splice(i-1,1); break;
+ 
+  for (let i=0; i<orr.length; i++){
+    switch(orr[i]) { 
+      case '--discard-next': if (orr[i+1]!=undefined && orr[i+2]!='--discard-prev') orr.splice(i,2); else orr.splice(i,1); break;
+      case '--discard-prev': if (orr[i-1]!=undefined && orr[i-2]!='--discard-next') orr.splice(i-1,2); else orr.splice(i,1); break;
       default: break;
     }
   }
-  console.log(new_arr);
-  return arr;
+  console.log(orr);
+  return orr;
 };
