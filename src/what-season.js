@@ -7,6 +7,6 @@ module.exports = function getSeason(date) {
   if (str==2 || str==3 || str==4) return 'spring';
   if (str==5 || str==6 || str==7) return 'summer';   
   if (str==8 || str==9 || str==10) return 'autumn';
-  if (str='error') throw str;
+  if (str==='Error') throw str;
   return str;
 };
