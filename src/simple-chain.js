@@ -26,8 +26,7 @@ const chainMaker = {
   finishChain() {
     let string = "";
     //this.chain.forEach ( link => {
-    //for (link in this.chain) {
-    for (let i=0;i<this.chain.length;i++) {
+    for (let link of this.chain) {
       string += '( ' + this.chain[i] + ' )~~';
     }
     this.chain = [];
