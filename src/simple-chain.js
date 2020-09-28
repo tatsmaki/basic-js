@@ -25,9 +25,10 @@ const chainMaker = {
   },
   finishChain() {
     let string = "";
-    this.chain.forEach ( link => {
+    //this.chain.forEach ( link => {
+    for (link in this.chain) {
       string += '( ' + link + ' )~~';
-    })
+    }
     this.chain = [];
     return string.slice(0, -2);
   }
